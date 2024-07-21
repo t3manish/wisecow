@@ -1,14 +1,26 @@
 {
   "name": "wisecow",
   "version": "1.0.0",
-  "description": "Wisecow Application",
+  "description": "Wisecow app",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
-  "author": "Your Name",
-  "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
-  }
+    "express": "^4.17.1",
+    "cowsay": "^1.5.0",
+    "fortune": "^5.5.19"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/t3manish/wisecow.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/t3manish/wisecow/issues"
+  },
+  "homepage": "https://github.com/t3manish/wisecow#readme"
 }

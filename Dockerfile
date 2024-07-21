@@ -1,20 +1,25 @@
-# Use an official Node runtime as a parent image
 FROM node:14
 
-# Set the working directory in the container
+# Install fortune and cowsay
+RUN apt-get update && apt-get install -y fortune cowsay
+
+# Create app directory
 WORKDIR /app
 
-# Copy the package.json and package-lock.json files
+# Copy package.json and package-lock.json
 COPY package*.json ./
 
-# Install any needed packages specified in package.json
+# Install app dependencies
 RUN npm install
 
-# Copy the rest of the application code
+# Bundle app source
 COPY . .
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
+# Make wisecow.sh executable
+RUN chmod +x wisecow.sh
 
-# Run the app when the container launches
-CMD ["npm", "start"]
+# Expose the port
+EXPOSE 4499
+
+# Command to run the app
+CMD ["./wisecow.sh"]
