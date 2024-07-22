@@ -1,25 +1,22 @@
-FROM node:14
+# Use an official Ubuntu as a parent image
+FROM ubuntu:latest
 
-# Install fortune and cowsay
-RUN apt-get update && apt-get install -y fortune cowsay
-
-# Create app directory
+# Set the working directory
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Install app dependencies
-RUN npm install
-
-# Bundle app source
-COPY . .
+# Install necessary packages
+RUN apt-get update && \
+    apt-get install -y fortune-mod cowsay netcat && \
+    rm -rf /var/lib/apt/lists/*
 
 # Make wisecow.sh executable
 RUN chmod +x wisecow.sh
 
-# Expose the port
+# Expose the port the app runs on
 EXPOSE 4499
 
-# Command to run the app
+# Run wisecow.sh when the container launches
 CMD ["./wisecow.sh"]

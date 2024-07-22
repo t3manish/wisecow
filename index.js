@@ -1,7 +1,7 @@
 const express = require('express');
 const { exec } = require('child_process');
 const app = express();
-const port = 4499;
+const port = 8080;
 
 app.get('/', (req, res) => {
   exec('./wisecow.sh', (error, stdout, stderr) => {
