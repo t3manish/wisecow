@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-SRVPORT=4499
+SRVPORT=8080
 RSPFILE=response
 
 rm -f $RSPFILE
@@ -25,12 +25,10 @@ EOF
 }
 
 prerequisites() {
-	command -v cowsay >/dev/null 2>&1 &&
-	command -v fortune >/dev/null 2>&1 || 
-		{ 
-			echo "Install prerequisites."
-			exit 1
-		}
+	if ! command -v cowsay &> /dev/null || ! command -v fortune &> /dev/null || ! command -v nc &> /dev/null; then
+		echo "Install prerequisites."
+		exit 1
+	fi
 }
 
 main() {
