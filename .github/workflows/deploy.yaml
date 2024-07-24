@@ -15,7 +15,7 @@ jobs:
       - name: Set up Kubeconfig
         run: |
           mkdir -p ~/.kube
-          echo "${{ secrets.KUBECONFIG }}" > ~/.kube/config
+          echo "${{ secrets.KUBECONFIG }}" | base64 --decode > ~/.kube/config
 
       - name: Debug Kubernetes Connection
         run: |
@@ -25,8 +25,11 @@ jobs:
 
       - name: Apply Kubernetes manifests
         run: |
-          kubectl apply -f deployment.yaml --validate=false
-          kubectl apply -f service.yaml --validate=false
-          kubectl apply -f ingress.yaml --validate=false
-          kubectl apply -f cluster-issuer.yaml --validate=false
-          kubectl apply -f certificate.yaml --validate=false
+          kubectl apply -f deployment.yaml
+          kubectl apply -f service.yaml
+          kubectl apply -f ingress.yaml
+          kubectl apply -f cluster-issuer.yaml
+          kubectl apply -f certificate.yaml
+        shell: /usr/bin/bash -e {0}
+        env:
+          KUBECONFIG: ${{ secrets.KUBECONFIG }}
