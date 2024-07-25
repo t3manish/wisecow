@@ -1,0 +1,1 @@
+- --basic-auth-file=/etc/kubernetes/pki/basic_auth.csv
